@@ -98,7 +98,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Supabase + React (Live Chat)</h1>
+      <h1>Live Chat</h1>
 
       <button
         className="toggle-button"
