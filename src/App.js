@@ -4,7 +4,7 @@ import { supabase } from './supabaseClient';
 
 function App() {
   const [messages, setMessages] = useState([]);
-  const [files, setFiles] = useState([]); // ✅ Added state to store file list
+  const [files, setFiles] = useState([]);
   const [name, setName] = useState('');
   const [text, setText] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -53,6 +53,16 @@ function App() {
       console.error('Fetch error:', error.message);
     } else {
       setMessages(data);
+    }
+  };
+
+  // ✅ Delete Message
+  const deleteMessage = async (id) => {
+    const { error } = await supabase.from('messages').delete().eq('id', id);
+    if (error) {
+      alert('❌ Failed to delete message: ' + error.message);
+    } else {
+      setMessages((prev) => prev.filter((msg) => msg.id !== id));
     }
   };
 
@@ -156,7 +166,21 @@ function App() {
         {messages.map((msg) => (
           <li key={msg.id}>
             <strong>{msg.user_name}:</strong> {msg.content} <br />
-            <small>{new Date(msg.created_at).toLocaleString()}</small>
+            <small>{new Date(msg.created_at).toLocaleString()}</small> <br />
+            <button
+              onClick={() => deleteMessage(msg.id)}
+              style={{
+                backgroundColor: 'red',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px',
+                padding: '4px 8px',
+                cursor: 'pointer',
+                marginTop: '5px'
+              }}
+            >
+              🗑 Delete
+            </button>
           </li>
         ))}
       </ul>
