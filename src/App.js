@@ -42,12 +42,12 @@ function App() {
     }
   };
 
-  // ✅ Fetch Messages
+  // ✅ Fetch Messages (latest first)
   const fetchMessages = async () => {
     const { data, error } = await supabase
       .from('messages')
       .select('*')
-      .order('created_at', { ascending: true });
+      .order('created_at', { ascending: false }); // ✅ latest first
 
     if (error) {
       console.error('Fetch error:', error.message);
@@ -77,7 +77,7 @@ function App() {
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'messages' },
         (payload) => {
-          setMessages((prev) => [...prev, payload.new]);
+          setMessages((prev) => [payload.new, ...prev]); // ✅ add new at top
         }
       )
       .subscribe();
