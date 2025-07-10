@@ -3,6 +3,7 @@ import './App.css';
 import { supabase } from './supabaseClient';
 
 function App() {
+  
   const [messages, setMessages] = useState([]);
   const [files, setFiles] = useState([]);
   const [name, setName] = useState('');

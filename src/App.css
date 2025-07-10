@@ -1,56 +1,68 @@
-/* === Reset default styles === */
+/* === Reset & Base Styles === */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f2f2f2;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* === Container styling === */
+/* === Container === */
 .container {
-  max-width: 600px;
+  max-width: 700px;
+  width: 90%;
   margin: 40px auto;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.container:hover {
+  transform: scale(1.01);
 }
 
 /* === Heading === */
 h1 {
   text-align: center;
   color: #2c3e50;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
 }
 
 /* === Toggle Button === */
 .toggle-button {
-  background-color: #3498db;
+  background: linear-gradient(135deg, #74ebd5, #9face6);
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
+  border-radius: 12px;
+  padding: 12px 24px;
   font-size: 1rem;
-  margin-bottom: 20px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 .toggle-button:hover {
-  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* === Sidebar panel === */
+/* === Sidebar === */
 .sidebar {
-  background-color: #ecf0f1;
-  border-left: 4px solid #3498db;
+  background: rgba(236, 240, 241, 0.8);
+  border-left: 4px solid #74b9ff;
   padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  animation: slideIn 0.3s ease;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  animation: slideIn 0.4s ease-out;
 }
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-30px);
   }
   to {
     opacity: 1;
@@ -58,8 +70,8 @@ h1 {
   }
 }
 .sidebar h2 {
-  margin-top: 0;
-  color: #2c3e50;
+  margin: 0;
+  color: #2d3436;
 }
 
 /* === Upload Section === */
@@ -68,72 +80,85 @@ h1 {
 }
 .upload-section input[type='file'] {
   font-size: 1rem;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  background-color: #fff;
 }
 
-/* === Chat Form === */
+/* === Form === */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 25px;
+  gap: 12px;
 }
 .form input {
-  padding: 12px;
+  padding: 14px;
   font-size: 1rem;
+  border-radius: 12px;
   border: 1px solid #ccc;
-  border-radius: 8px;
   outline: none;
+  transition: all 0.2s ease;
+}
+.form input:focus {
+  border-color: #7f8c8d;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 .form button {
-  padding: 12px;
-  font-size: 1rem;
   background-color: #2c3e50;
   color: white;
+  padding: 14px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s ease, background-color 0.3s ease;
 }
 .form button:hover {
-  background-color: #1a242f;
+  background-color: #1a252f;
+  transform: translateY(-2px);
 }
 
-/* === Messages List === */
+/* === Messages === */
 ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 li {
-  background-color: #f9f9f9;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 12px;
-  border: 1px solid #ddd;
+  background: #ffffffd4;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+li:hover {
+  transform: scale(1.02);
 }
 li strong {
   color: #34495e;
-  font-weight: bold;
 }
 li small {
-  display: block;
-  margin-top: 5px;
   color: #888;
   font-size: 0.85rem;
+  margin-top: 4px;
+  display: block;
 }
 
-/* === File Links inside Sidebar === */
+/* === Sidebar File Links === */
 .sidebar ul {
-  padding-left: 16px;
+  padding-left: 18px;
 }
 .sidebar li {
-  background: none;
   padding: 4px 0;
   border: none;
 }
 .sidebar a {
-  color: #2980b9;
+  color: #3498db;
   text-decoration: none;
+  transition: color 0.2s;
 }
 .sidebar a:hover {
   text-decoration: underline;
+  color: #2c3e50;
 }
