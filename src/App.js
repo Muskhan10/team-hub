@@ -8,7 +8,23 @@ function App() {
   const [text, setText] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // ✅ File Upload + Store as Message
+  const getRandomColor = () => {
+    const neonColors = [
+      '#FF6B6B', '#FF9F43', '#FFD93D', '#6BCB77',
+      '#4D96FF', '#A66DD4', '#FF61C3', '#F72585'
+    ];
+    return neonColors[Math.floor(Math.random() * neonColors.length)];
+  };
+
+  const userColors = {};
+
+  const getColorForUser = (user) => {
+    if (!userColors[user]) {
+      userColors[user] = getRandomColor();
+    }
+    return userColors[user];
+  };
+
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -27,7 +43,6 @@ function App() {
       .from('uploads')
       .getPublicUrl(filePath);
 
-    // ✅ Add file as a message
     const { error: insertError } = await supabase.from('messages').insert([
       {
         user_name: name.trim() || 'Anonymous',
@@ -46,31 +61,22 @@ function App() {
     }
   };
 
-  // ✅ Fetch messages
   const fetchMessages = async () => {
     const { data, error } = await supabase
       .from('messages')
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (error) {
-      console.error('Fetch error:', error.message);
-    } else {
-      setMessages(data);
-    }
+    if (!error) setMessages(data);
   };
 
-  // ✅ Delete message
   const deleteMessage = async (id) => {
     const { error } = await supabase.from('messages').delete().eq('id', id);
-    if (error) {
-      alert('❌ Failed to delete message: ' + error.message);
-    } else {
+    if (!error) {
       setMessages((prev) => prev.filter((msg) => msg.id !== id));
     }
   };
 
-  // ✅ On mount
   useEffect(() => {
     fetchMessages();
 
@@ -90,7 +96,6 @@ function App() {
     };
   }, []);
 
-  // ✅ Send chat message
   const sendMessage = async (e) => {
     e.preventDefault();
     if (!name.trim() || !text.trim()) return;
@@ -102,11 +107,7 @@ function App() {
       },
     ]);
 
-    if (error) {
-      alert('Error sending message: ' + error.message);
-    } else {
-      setText('');
-    }
+    if (!error) setText('');
   };
 
   return (
@@ -117,20 +118,19 @@ function App() {
         className="toggle-button"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        🧑‍🤝‍🧑 Team Hub
+        🧑‍🤝‍🧑 Toggle Panel
       </button>
 
       {isSidebarOpen && (
         <div className="sidebar">
-          <h2>👥 Team Chat Panel</h2>
-          <p>This is where shared content or team list can appear.</p>
-          <p>Files are also shown below in chat feed.</p>
+          <h2>👥 Team Panel</h2>
+          <p>Upload and view shared content here.</p>
         </div>
       )}
 
       <div className="upload-section">
-        <h3>📤 Upload File</h3>
-        <input type="file" onChange={handleFileUpload} />
+        <label htmlFor="file-upload">📤 Upload File:</label>
+        <input type="file" id="file-upload" onChange={handleFileUpload} />
       </div>
 
       <form onSubmit={sendMessage} className="form">
@@ -160,9 +160,11 @@ function App() {
             content = msg.content;
           }
 
+          const color = getColorForUser(msg.user_name);
+
           return (
             <li key={msg.id}>
-              <strong>{msg.user_name}:</strong>{' '}
+              <strong style={{ color }}>{msg.user_name}:</strong>{' '}
               {typeof content === 'string' ? (
                 content
               ) : content?.type === 'file' ? (
@@ -174,20 +176,7 @@ function App() {
               )}
               <br />
               <small>{new Date(msg.created_at).toLocaleString()}</small> <br />
-              <button
-                onClick={() => deleteMessage(msg.id)}
-                style={{
-                  backgroundColor: 'red',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '5px',
-                  padding: '4px 8px',
-                  cursor: 'pointer',
-                  marginTop: '5px',
-                }}
-              >
-                🗑 Delete
-              </button>
+              <button onClick={() => deleteMessage(msg.id)}>🗑 Delete</button>
             </li>
           );
         })}
