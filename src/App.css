@@ -2,163 +2,165 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  font-family: 'Segoe UI', 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #1a1a1a, #2c0000);
   min-height: 100vh;
+  color: #fff;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 /* === Container === */
 .container {
+  width: 95%;
   max-width: 700px;
-  width: 90%;
-  margin: 40px auto;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(16px);
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-.container:hover {
-  transform: scale(1.01);
+  margin: 30px auto;
+  padding: 30px;
+  background: rgba(255, 0, 0, 0.05);
+  border: 1px solid #800000;
+  border-radius: 18px;
+  box-shadow: 0 0 18px rgba(255, 30, 30, 0.3);
+  backdrop-filter: blur(8px);
 }
 
 /* === Heading === */
 h1 {
+  font-size: 2rem;
   text-align: center;
-  color: #2c3e50;
-  font-size: 2.5rem;
-  margin-bottom: 30px;
+  color: #ff4d4d;
+  text-shadow: 0 0 4px #990000;
 }
 
 /* === Toggle Button === */
 .toggle-button {
-  background: linear-gradient(135deg, #74ebd5, #9face6);
+  background: #cc0000;
   color: white;
   border: none;
-  border-radius: 12px;
-  padding: 12px 24px;
-  font-size: 1rem;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
+  margin-bottom: 18px;
+  transition: 0.3s ease;
 }
 .toggle-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background: #ff1a1a;
+  box-shadow: 0 0 8px #ff1a1a;
 }
 
 /* === Sidebar === */
 .sidebar {
-  background: rgba(236, 240, 241, 0.8);
-  border-left: 4px solid #74b9ff;
-  padding: 20px;
-  border-radius: 16px;
-  margin-bottom: 30px;
-  animation: slideIn 0.4s ease-out;
-}
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  background: #2b0000b3;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #800000;
+  margin-bottom: 18px;
 }
 .sidebar h2 {
-  margin: 0;
-  color: #2d3436;
+  color: #ff3333;
 }
 
 /* === Upload Section === */
 .upload-section {
-  margin-bottom: 25px;
+  margin: 15px 0;
 }
 .upload-section input[type='file'] {
-  font-size: 1rem;
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #bbb;
-  background-color: #fff;
+  background: #1a1a1a;
+  color: white;
+  border: 1px solid #cc0000;
+  border-radius: 6px;
+  padding: 4px 8px;
+  width: fit-content;
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
 /* === Form === */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 .form input {
-  padding: 14px;
-  font-size: 1rem;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  outline: none;
-  transition: all 0.2s ease;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cc0000;
+  background: #1c1c1c;
+  color: white;
 }
 .form input:focus {
-  border-color: #7f8c8d;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+  border-color: #ff4d4d;
+  box-shadow: 0 0 4px #ff4d4d;
 }
 .form button {
-  background-color: #2c3e50;
+  background: #cc0000;
   color: white;
-  padding: 14px;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.3s ease;
+  transition: 0.2s ease;
 }
 .form button:hover {
-  background-color: #1a252f;
-  transform: translateY(-2px);
+  background: #b30000;
+  box-shadow: 0 0 6px #b30000;
 }
 
-/* === Messages === */
+/* === Message List === */
 ul {
   list-style: none;
   padding: 0;
 }
 li {
-  background: #ffffffd4;
-  padding: 14px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 60, 60, 0.05);
+  border-left: 3px solid #ff4d4d;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
   transition: transform 0.2s;
 }
 li:hover {
-  transform: scale(1.02);
+  transform: scale(1.01);
 }
 li strong {
-  color: #34495e;
+  color: #ff6666;
 }
 li small {
-  color: #888;
-  font-size: 0.85rem;
-  margin-top: 4px;
-  display: block;
+  color: #aaaaaa;
 }
 
-/* === Sidebar File Links === */
-.sidebar ul {
-  padding-left: 18px;
-}
-.sidebar li {
-  padding: 4px 0;
+/* === Delete Button === */
+li button {
+  background: #cc0000;
   border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: white;
+  cursor: pointer;
+  margin-top: 6px;
 }
-.sidebar a {
-  color: #3498db;
-  text-decoration: none;
-  transition: color 0.2s;
+li button:hover {
+  background: #a80000;
 }
-.sidebar a:hover {
-  text-decoration: underline;
-  color: #2c3e50;
+
+/* === Mobile Responsive === */
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 20px;
+    margin: 20px 10px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .form input,
+  .form button,
+  .upload-section input {
+    font-size: 0.95rem;
+  }
 }
